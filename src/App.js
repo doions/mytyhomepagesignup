@@ -1,5 +1,8 @@
-import React, { useState } from "react";
+import React, { useState, useRef } from "react";
 import { auth,googleProvider,database } from "./firebase";
+import VideoPlayer from "./Video";
+
+
 import {
   createUserWithEmailAndPassword,
   signInWithEmailAndPassword,
@@ -32,9 +35,26 @@ const App = () => {
   const [user, setUser] = useState(null);
   const [name, setName] = useState('');
   const [age, setAge] = useState('');
+  const playerRef = useRef(null);
+
+
+  const videoJsOptions = {
+    autoplay: true,
+    controls: true,
+    responsive: true,
+    fluid: true,
+    sources: [
+      {
+        src: "https://vjs.zencdn.net/v/oceans.mp4", // Replace with your video URL
+        type: "video/mp4",
+      },
+    ],
+  };
+  
 
   // Monitor authentication state
   React.useEffect(() => {
+    
     const unsubscribe = onAuthStateChanged(auth, (currentUser) => {
       setUser(currentUser);
     });
@@ -114,13 +134,30 @@ const App = () => {
       console.error('Error adding data:', error);
     }
   };
+  const handlePlayerReady = (player) => {
+    playerRef.current = player;
+
+    // You can handle player events here, for example:
+    player.on('waiting', () => {
+      console.log('player is waiting');
+    });
+
+    player.on('dispose', () => {
+      console.log('player will dispose');
+    });
+  };
 
   return (
 
-
+<>
+    <div className="App">
    
+    <VideoPlayer options={videoJsOptions} onReady={handlePlayerReady}/>
+  </div>
     <div style={{ padding: "20px", maxWidth: "400px", margin: "auto" }}>
-      <div><div>
+      <div>
+      
+        <div>
       <h2>Add User Data</h2>
       <form onSubmit={handleSubmit}>
         <div>
@@ -185,6 +222,7 @@ const App = () => {
         </div>
       )}
     </div>
+    </>
   );
 };
 
