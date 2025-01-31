@@ -1,10 +1,13 @@
 import React, { useState } from "react";
-import { auth } from "./firebase";
+import { auth,googleProvider } from "./firebase";
 import {
   createUserWithEmailAndPassword,
   signInWithEmailAndPassword,
+  signInWithPopup,
+  signInAnonymously,
+  sendEmailVerification,
+  onAuthStateChanged,
   signOut,
-  onAuthStateChanged
 } from "firebase/auth";
 
 const App = () => {
@@ -23,8 +26,12 @@ const App = () => {
   // Sign up user
   const handleSignup = async () => {
     try {
-      await createUserWithEmailAndPassword(auth, email, password);
+      const userCredential = await createUserWithEmailAndPassword(auth, email, password);
       alert("User created successfully!");
+      await sendEmailVerification(userCredential.user);
+      alert("Verification email sent!");
+
+
     } catch (error) {
       console.error("Error signing up:", error.message);
       alert(error.message);
@@ -41,7 +48,28 @@ const App = () => {
       alert(error.message);
     }
   };
+    // Sign in with Google
 
+  const handleGoogleSignIn = async () => {
+    try {
+      await signInWithPopup(auth, googleProvider);
+      alert("Google Sign-In successful!");
+    } catch (error) {
+      console.error("Error with Google Sign-In:", error.message);
+      alert(error.message);
+    }
+  };
+
+  // Sign in anonymously
+  const handleAnonymousSignIn = async () => {
+    try {
+      await signInAnonymously(auth);
+      alert("Signed in anonymously!");
+    } catch (error) {
+      console.error("Error with anonymous sign-in:", error.message);
+      alert(error.message);
+    }
+  };
   // Log out user
   const handleLogout = async () => {
     try {
@@ -58,7 +86,10 @@ const App = () => {
       <h1>Firebase Auth</h1>
       {user ? (
         <div>
-          <h2>Welcome, {user.email}</h2>
+          <h2>Welcome, {user.email || "Anonymous User"}</h2>
+          {user.emailVerified === false && user.email && (
+            <p style={{ color: "red" }}>Please verify your email!</p>
+          )}
           <button onClick={handleLogout} style={{ marginTop: "10px" }}>
             Logout
           </button>
@@ -84,6 +115,12 @@ const App = () => {
           </button>
           <button onClick={handleLogin} style={{ margin: "5px" }}>
             Log In
+          </button>
+          <button onClick={handleGoogleSignIn} style={{ margin: "5px" }}>
+            Sign In with Google
+          </button>
+          <button onClick={handleAnonymousSignIn} style={{ margin: "5px" }}>
+            Sign In Anonymously
           </button>
         </div>
       )}
