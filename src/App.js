@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { auth,googleProvider } from "./firebase";
+import { auth,googleProvider,database } from "./firebase";
 import {
   createUserWithEmailAndPassword,
   signInWithEmailAndPassword,
@@ -9,11 +9,29 @@ import {
   onAuthStateChanged,
   signOut,
 } from "firebase/auth";
+import { ref, set, onValue } from "firebase/database";
+console.log(database)
+const dbRef = ref(database, "users/1");
+set(dbRef, {
+  username: "JohnDoe",
+  email: "johndoe@example.com",
+  profile_picture: "https://example.com/johndoe.jpg"
+}).then(() => {
+  console.log("Data saved successfully!");
+}).catch((error) => {
+  console.error("Error writing data: ", error);
+});
+onValue(dbRef, (snapshot) => {
+  const data = snapshot.val();
+  console.log("Data fetched: ", data);
+});
 
 const App = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [user, setUser] = useState(null);
+  const [name, setName] = useState('');
+  const [age, setAge] = useState('');
 
   // Monitor authentication state
   React.useEffect(() => {
@@ -80,10 +98,52 @@ const App = () => {
       alert(error.message);
     }
   };
+  const handleSubmit = async (event) => {
+    event.preventDefault();
+
+    try {
+      const userRef = ref(database, 'users/' + name);
+      await set(userRef, {
+        name: name,
+        age: age
+      });
+      console.log('Data added successfully!');
+      setName('');
+      setAge('');
+    } catch (error) {
+      console.error('Error adding data:', error);
+    }
+  };
 
   return (
+
+
+   
     <div style={{ padding: "20px", maxWidth: "400px", margin: "auto" }}>
-      <h1>Firebase Auth</h1>
+      <div><div>
+      <h2>Add User Data</h2>
+      <form onSubmit={handleSubmit}>
+        <div>
+          <label htmlFor="name">Name:</label>
+          <input
+            type="text"
+            id="name"
+            value={name}
+            onChange={(e) => setName(e.target.value)}
+          />
+        </div>
+        <div>
+          <label htmlFor="age">Age:</label>
+          <input
+            type="number"
+            id="age"
+            value={age}
+            onChange={(e) => setAge(e.target.value)}
+          />
+        </div>
+        <button type="submit">Add User</button>
+      </form>
+    </div></div>
       {user ? (
         <div>
           <h2>Welcome, {user.email || "Anonymous User"}</h2>
