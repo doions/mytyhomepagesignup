@@ -36,3 +36,4 @@
     transform: rotate(360deg);
   }
 }
+@custom-variant dark (&:where(.dark, .dark *));

@@ -51,7 +51,7 @@ const MytyCanvas = () => {
       ctx.fillStyle = `hsl(${hue}, 100%, 60%)`;
       ctx.textAlign = "center";
       ctx.textBaseline = "middle";
-      ctx.fillText("myty.in", x, y);
+      ctx.fillText("myty.in - a new media platform", x, y);
     };
 
     const animate = () => {
