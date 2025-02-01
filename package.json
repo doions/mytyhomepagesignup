@@ -7,12 +7,13 @@
     "@tailwindcss/postcss": "^4.0.2",
     "@videojs/themes": "^1.0.1",
     "cra-template": "1.2.0",
+    "deps": "^1.0.0",
     "firebase": "^11.2.0",
     "framer-motion": "^12.0.6",
+    "lucide-react": "^0.474.0",
     "react": "^19.0.0",
     "react-dom": "^19.0.0",
     "react-scripts": "5.0.1",
-    "typescript": "^5.7.3",
     "video.js": "^8.21.0"
   },
   "scripts": {
