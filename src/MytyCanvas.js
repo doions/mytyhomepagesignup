@@ -1,7 +1,36 @@
-import React, { useEffect, useRef } from "react";
+import React, { useEffect, useRef, useState } from "react";
+import fontsData from "./fonts.json";
 
 const MytyCanvas = () => {
   const canvasRef = useRef(null);
+  const [currentFont, setCurrentFont] = useState("Poppins");
+
+  useEffect(() => {
+    const loadGoogleFont = (font) => {
+      const link = document.createElement("link");
+      link.href = `https://fonts.googleapis.com/css2?family=${font.replace(
+        / /g,
+        "+"
+      )}:wght@700&display=swap`;
+      link.rel = "stylesheet";
+      document.head.appendChild(link);
+    };
+
+    const updateFont = () => {
+      const randomFont =
+        fontsData.fonts[Math.floor(Math.random() * fontsData.fonts.length)];
+      loadGoogleFont(randomFont);
+      setCurrentFont(randomFont);
+    };
+
+    // Initial font load
+    updateFont();
+
+    // Change font every 5 seconds
+    const fontInterval = setInterval(updateFont, 5000);
+
+    return () => clearInterval(fontInterval);
+  }, []);
 
   useEffect(() => {
     const canvas = canvasRef.current;
@@ -18,11 +47,11 @@ const MytyCanvas = () => {
 
     const drawText = () => {
       ctx.clearRect(0, 0, canvas.width, canvas.height);
-      ctx.font = "80px 'Poppins', sans-serif";
+      ctx.font = `80px '${currentFont}', sans-serif`;
       ctx.fillStyle = `hsl(${hue}, 100%, 60%)`;
       ctx.textAlign = "center";
       ctx.textBaseline = "middle";
-      ctx.fillText("myty", x, y);
+      ctx.fillText("myty.in", x, y);
     };
 
     const animate = () => {
@@ -39,7 +68,6 @@ const MytyCanvas = () => {
 
     animate();
 
-    // Resize canvas on window resize
     const handleResize = () => {
       canvas.width = window.innerWidth;
       canvas.height = window.innerHeight;
@@ -49,7 +77,7 @@ const MytyCanvas = () => {
 
     window.addEventListener("resize", handleResize);
     return () => window.removeEventListener("resize", handleResize);
-  }, []);
+  }, [currentFont]);
 
   return <canvas ref={canvasRef} className="w-full h-screen bg-black"></canvas>;
 };
