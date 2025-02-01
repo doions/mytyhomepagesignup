@@ -22,7 +22,7 @@ const MytyCanvas = () => {
       ctx.fillStyle = `hsl(${hue}, 100%, 60%)`;
       ctx.textAlign = "center";
       ctx.textBaseline = "middle";
-      ctx.fillText("MYTY", x, y);
+      ctx.fillText("myty", x, y);
     };
 
     const animate = () => {
