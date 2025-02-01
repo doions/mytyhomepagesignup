@@ -1,17 +1,17 @@
 import React from "react";
 //import MytyCanvas from "./MytyCanvas";
 import MediaBotLogo from "./MediaBotLogo";
-import ChatInput from "./components/ChatInput";
-import Chatbot from "./components/Chatbot";
+//import ChatInput from "./components/ChatInput";
+//import Chatbot from "./components/Chatbot";
 import Register from "./components/Register";
 
 
 function App() {
 
-    const toggleDarkMode = () => {
+    /* const toggleDarkMode = () => {
         document.documentElement.classList.toggle("dark");
         console.log("clicked")
-      };
+      }; 
       
     const handleSendMessage = (message, file) => {
         console.log("Message:", message);
@@ -20,7 +20,7 @@ function App() {
     
       const handleUpload = (file) => {
         console.log("File Uploaded:", file);
-      };
+      };*/
   return (
     <div className="App">
      
