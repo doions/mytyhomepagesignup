@@ -1,7 +1,21 @@
-import React from "react";
-import { AtSign } from "lucide-react";
+import React, { useState } from "react";
+import Signup from "./Signup";
+import Login from "./Login";
+import Landing from "./Landing";
+import Playbutton from "./Playbutton.js";
+import Chat from "./Chat";
+
 
 const Register = ({ onSendMessage, onUpload }) => {
+  const [authSelect, setauthSelect] = useState("landing")
+  const [isLoading, setIsLoading] = useState(false)
+  //const [command, setCommand] = useState("init")
+
+  const handleAuth = (data) => {
+    setauthSelect(data)
+    console.log("auth set screen next")
+  }
+  
   /* const [message, setMessage] = useState("");
   const [file, setFile] = useState(null); */
 
@@ -22,26 +36,34 @@ const Register = ({ onSendMessage, onUpload }) => {
   };
 */
   return (
-    <div className="fixed bottom-0 w-full bg-white dark:bg-gray-900 p-4 shadow-lg border-t dark:border-gray-700 flex items-center gap-3 md:max-w-3xl mx-auto rounded-t-2xl">
-      {/* File Upload Button */}
-      <label className="cursor-pointer flex items-center justify-center bg-gray-100 dark:bg-gray-800 hover:bg-gray-200 dark:hover:bg-gray-700 rounded-lg p-2">
-        <AtSign size={30} className="text-gray-500 dark:text-gray-400" />
-        
+    <>  <div className="fixed bottom-0 w-full bg-white dark:bg-gray-900 p-4 shadow-lg border-t dark:border-gray-700 flex  gap-3 md:max-w-3xl mx-auto rounded-t-2xl">
+      {/* File Upload Button , aj i need to add a component here which renders a button depends on the content on the panel.*/}
+      <label className="cursor-pointer w-full flex items-center justify-center bg-gray-100 dark:bg-gray-800 hover:bg-gray-200 dark:hover:bg-gray-700 rounded-lg p-2">
+
+        {authSelect === "landing" ? (<><Landing handleLanding={handleAuth} /><span className="flex flex-row">
+         {/*  <Playbutton /> we will see later*/}
+          </span></>) : ""}
+
+        {authSelect === "register" ? (<Signup SetIsLoading={setIsLoading} handleBack={handleAuth}/>) : ""}
+
+        {authSelect === "login" ? (<Login handleBack={handleAuth}/>) : ""}
+        {authSelect === "chat" ? (<Chat />) : ""}
+
+
       </label>
-      <label className="cursor-pointer flex items-center justify-center bg-gray-100 dark:bg-gray-800 hover:bg-gray-200 dark:hover:bg-gray-700 rounded-lg p-4">
-<b>Register</b></label>- or -
-<label className="cursor-pointer flex items-center justify-center bg-gray-100 dark:bg-gray-800 hover:bg-gray-200 dark:hover:bg-gray-700 rounded-lg p-4">
-<b>Login</b></label>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;<b>myty</b>is an AI bot for live entertainment.
-     
-     {/** css correction is required for mobile responsiveness of the text tag line. */} {/* Send Button 
+
+
+
+
+
+      {/** css correction is required for mobile responsiveness of the text tag line. */} {/* Send Button 
       <button
         className="bg-black text-white p-5 rounded-lg hover:bg-black-600 flex items-center justify-center"
         onClick={handleSend}
       >
         <Send size={25} />
       </button>*/}
-    </div>
+    </div></>
   );
 };
 

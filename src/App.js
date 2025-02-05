@@ -5,7 +5,6 @@ import MediaBotLogo from "./MediaBotLogo";
 //import Chatbot from "./components/Chatbot";
 import Register from "./components/Register";
 
-
 function App() {
 
     /* const toggleDarkMode = () => {
@@ -25,7 +24,7 @@ function App() {
     <div className="App">
      
       <div className="flex justify-center items-center min-h-screen bg-black">
-      <MediaBotLogo size={200} />
+      <MediaBotLogo size={300} />
     </div>
    
     <div className="min-h-screen flex  justify-center bg-gray-100">

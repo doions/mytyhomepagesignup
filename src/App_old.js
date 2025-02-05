@@ -1,5 +1,5 @@
 import React, { useState, useRef } from "react";
-import { auth,googleProvider,database } from "./firebase";
+import { auth,googleProvider,database } from "./components/firebase";
 import VideoPlayer from "./Video";
 
 
@@ -182,6 +182,8 @@ const App = () => {
         <button type="submit">Add User</button>
       </form>
     </div></div>
+
+    {/**section seperator */}
       {user ? (
         <div>
           <h2>Welcome, {user.email || "Anonymous User"}</h2>
@@ -224,7 +226,7 @@ const App = () => {
         </div>
       )}
     </div>
-
+ {/**section seperator */}
     <div className="min-h-screen bg-gray-100 flex items-center justify-center">
       <div className="bg-white shadow-lg rounded-lg p-6 w-full max-w-md">
         <h1 className="text-2xl font-bold text-center text-gray-800 mb-6">Firebase Authentication</h1>
