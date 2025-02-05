@@ -37,7 +37,7 @@ function App() {
       
       <MediaBotLogo size={300} />
     </div>
-    <div><VideoPlayer options={videoJsOptions} /></div>
+    <div><VideoPlayer options={videoJsOptions}/></div>
     
     <div className="min-h-screen flex  justify-center bg-gray-100">
 

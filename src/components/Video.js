@@ -1,6 +1,7 @@
 import React, { useRef, useEffect } from "react";
 import videojs from "video.js";
 import "video.js/dist/video-js.css";
+import '@videojs/themes/dist/city/index.css';
 
 const initialOptions = {
   controls: true,
@@ -33,7 +34,7 @@ const VideoPlayer = ({ options }) => {
     };
   }, [options]);
 
-  return <video ref={videoNode} className="video-js" />;
+  return <video ref={videoNode} className="video-js vjs-theme-city" />;
 };
 
 export default VideoPlayer;
