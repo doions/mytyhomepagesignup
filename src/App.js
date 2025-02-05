@@ -4,6 +4,16 @@ import MediaBotLogo from "./MediaBotLogo";
 //import ChatInput from "./components/ChatInput";
 //import Chatbot from "./components/Chatbot";
 import Register from "./components/Register";
+import VideoPlayer from "./components/Video";
+
+const videoJsOptions = {
+  sources: [
+    {
+      src: "//vjs.zencdn.net/v/oceans.mp4",
+      type: "video/mp4"
+    }
+  ]
+};
 
 function App() {
 
@@ -24,9 +34,11 @@ function App() {
     <div className="App">
      
       <div className="flex justify-center items-center min-h-screen bg-black">
+      
       <MediaBotLogo size={300} />
     </div>
-   
+    <div><VideoPlayer options={videoJsOptions} /></div>
+    
     <div className="min-h-screen flex  justify-center bg-gray-100">
 
      <Register/>
