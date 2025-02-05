@@ -16,7 +16,7 @@ import Commander from "./Commander";
 const Signup = ( {SetIsLoading,handleBack}) => {
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
-    //const [user, setUser] = useState(null);
+    const [user, setUser] = useState("anurag");
     const [emailError, setEmailError] = useState(0);
     //const [show, setShow] = useState(true);
     console.log(emailError)
@@ -41,7 +41,7 @@ const handleCommand = () => {
             setEmailError(3);
             SetIsLoading(true);
             await sendEmailVerification(userCredential.user);
-            console.log("Verification email sent!");
+            console.log("Verification email sent!".user);
             setEmailError(4);
             SetIsLoading(false);
 
@@ -99,6 +99,8 @@ const handleCommand = () => {
         }
             <span className="text-red-600 animate-pulse" >
                 {emailError === 2 ? "oops, this is not a valid emailid" : ""
+                }
+                {emailError === 4 ? user : ""
                 }
             </span></>
     )

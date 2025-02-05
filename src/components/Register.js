@@ -44,7 +44,7 @@ const Register = ({ onSendMessage, onUpload }) => {
          {/*  <Playbutton /> we will see later*/}
           </span></>) : ""}
 
-        {authSelect === "register" ? (<Signup SetIsLoading={setIsLoading} handleBack={handleAuth}/>) : ""}
+        {authSelect === "register" ? (<Signup /* SetIsLoading={setIsLoading} */ handleBack={handleAuth}/>) : ""}
 
         {authSelect === "login" ? (<Login handleBack={handleAuth}/>) : ""}
         {authSelect === "chat" ? (<Chat />) : ""}
