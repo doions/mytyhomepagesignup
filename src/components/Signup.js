@@ -1,14 +1,14 @@
 import React, { useState } from 'react'
 import validator from "validator";
-import { auth, googleProvider, database } from "./firebase";
+import { auth,/*  googleProvider, database */ } from "./firebase";
 import {
     createUserWithEmailAndPassword,
-    signInWithEmailAndPassword,
+    /* signInWithEmailAndPassword,
     signInWithPopup,
-    signInAnonymously,
+    signInAnonymously, */
     sendEmailVerification,
     onAuthStateChanged,
-    signOut,
+    /* signOut, */
 } from "firebase/auth";
 import Commander from "./Commander";
 
@@ -16,9 +16,9 @@ import Commander from "./Commander";
 const Signup = ( {SetIsLoading,handleBack}) => {
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
-    const [user, setUser] = useState(null);
+    //const [user, setUser] = useState(null);
     const [emailError, setEmailError] = useState(0);
-    const [show, setShow] = useState(true);
+    //const [show, setShow] = useState(true);
     console.log(emailError)
 
     React.useEffect(() => {
@@ -28,7 +28,7 @@ const Signup = ( {SetIsLoading,handleBack}) => {
         });
         return () => unsubscribe();
     }, []);
-    const showLoader = () => { setShow((s) => !s)}
+    //const showLoader = () => { setShow((s) => !s)}
 //I want to start the spin of the parent component from here.and print loading at the main panel of input area.
 const handleCommand = () => {
     handleBack('landing')

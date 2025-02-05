@@ -2,13 +2,13 @@ import React, { useState } from "react";
 import Signup from "./Signup";
 import Login from "./Login";
 import Landing from "./Landing";
-import Playbutton from "./Playbutton.js";
+//import Playbutton from "./Playbutton.js";
 import Chat from "./Chat";
 
 
 const Register = ({ onSendMessage, onUpload }) => {
   const [authSelect, setauthSelect] = useState("landing")
-  const [isLoading, setIsLoading] = useState(false)
+  //const [isLoading, setIsLoading] = useState(false)
   //const [command, setCommand] = useState("init")
 
   const handleAuth = (data) => {

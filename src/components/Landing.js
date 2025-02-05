@@ -13,9 +13,9 @@ const Landing = ({ handleLanding }) => {
       console.log("hello")
       handleLanding("login")
   }
-  const handleCommand = () => {
+ /*  const handleCommand = () => {
     handleLanding('chat')
-}
+} */
   return (
       <>                 <div className="flex  text-left items-center space-x-30 w-full">
                   
